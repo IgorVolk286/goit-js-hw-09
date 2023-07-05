@@ -14,6 +14,8 @@ const refs = {
 
 refs.buttonStart.disabled = true;
 
+refs.buttonStart.classList.add('button');
+refs.input.classList.add('input');
 let timerId = null;
 
 const options = {
@@ -37,12 +39,20 @@ const fp = flatpickr('#datetime-picker', options);
 refs.buttonStart.addEventListener('click', onButtonStartClick);
 
 function onButtonStartClick(event) {
-  const currentDate = new Date();
-  const inputDate = new Date(refs.input.value);
-  // console.log(inputData);
-  let finishDate = inputDate - currentDate;
-  // console.log(finishDate);
+  refs.buttonStart.disabled = true;
+
+  const marcUpButton = `<button type="button" class="button  js-button" > Reload Timer </button>`;
+  refs.buttonStart.insertAdjacentHTML('afterend', marcUpButton);
+
+  const buttonReload = document.querySelector('.js-button');
+  buttonReload.addEventListener('click', onButtonReloadlick);
+
   timerId = setInterval(() => {
+    const currentDate = new Date();
+    const inputDate = new Date(refs.input.value);
+    // console.log(inputData);
+    let finishDate = inputDate - currentDate;
+    // console.log(finishDate);
     const { days, hours, minutes, seconds } = convertMs(finishDate);
     refs.days.textContent = addLeadingZero(days);
 
@@ -53,11 +63,12 @@ function onButtonStartClick(event) {
 
   if (!finishDate) {
     clearInterval(timerId);
-    refs.buttonStart.disabled = true;
-    document.location.reload();
   }
 }
-
+function onButtonReloadlick() {
+  document.location.reload();
+  buttonReload.removeEventListener(onButtonReloadlick);
+}
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
