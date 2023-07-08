@@ -53,17 +53,18 @@ function onButtonStartClick(event) {
     // console.log(inputData);
     let finishDate = inputDate - currentDate;
     // console.log(finishDate);
+
     const { days, hours, minutes, seconds } = convertMs(finishDate);
     refs.days.textContent = addLeadingZero(days);
 
     refs.hours.textContent = addLeadingZero(hours);
     refs.minutes.textContent = addLeadingZero(minutes);
     refs.seconds.textContent = addLeadingZero(seconds);
-  }, 1000);
 
-  if (!finishDate) {
-    clearInterval(timerId);
-  }
+    if (!finishDate) {
+      clearInterval(timerId);
+    }
+  }, 1000);
 }
 function onButtonReloadlick() {
   document.location.reload();
