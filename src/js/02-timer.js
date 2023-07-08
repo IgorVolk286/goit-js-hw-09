@@ -28,7 +28,7 @@ const options = {
       Notiflix.Notify.warning('Please choose a date in the future');
       // return alert(`"Please choose a date in the future"`);
     } else {
-      Notiflix.Notify.success('YOU ARE COOL');
+      Notiflix.Notify.success('SALE WAITING FOR YOU');
       refs.buttonStart.disabled = false;
     }
   },
